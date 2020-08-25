@@ -11,10 +11,11 @@ DATA_DIR := inputmethod
 DATA_FILE := data.tar.xz
 AR_TOOLS := ar
 TAR_TOOLS := tar
+RM_TOOLS := rm
 
 #.PHONY: init checkout
 
-all: init checkout extract
+all: init checkout extract filter
 
 init:
 	@echo "Create directory: $(WORKSPACE)"
@@ -42,4 +43,7 @@ extract:
 			$(WORKSPACE)/$(DATA_DIR) \
 					-xf $(WORKSPACE)/$(DATA_FILE)
 
-	
+filter:
+	@echo "Filter duplicate files from $(DATA_FILE)"
+	@$(RM_TOOLS) -rf \
+			$(WORKSPACE)/$(DATA_DIR)/$(INPUTMETHOD)
